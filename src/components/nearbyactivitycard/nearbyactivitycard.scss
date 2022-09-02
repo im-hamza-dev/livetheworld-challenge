@@ -1,0 +1,66 @@
+.nearby-activity-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  margin: 20px;
+  max-width: 430px;
+  height: 500px;
+  text-align: left;
+
+  .nearby-activity-card-cover {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    img {
+      border-radius: 10px;
+      width: 100%;
+      height: 100%;
+    }
+
+    .nearby-activity-card-btn-wrapper {
+      position: absolute;
+      top: 30px;
+      margin-left: 11px;
+      z-index: 8;
+      display: flex;
+      button {
+        width: 69px;
+        height: 30px;
+        text-align: center;
+        background-color: rgb(252, 107, 67);
+        color: white;
+        outline: none;
+        border: none;
+        border-radius: 10px;
+        transition: 0.3s;
+        cursor: pointer;
+
+        &:hover {
+          background-color: rgb(193, 69, 35);
+        }
+      }
+    }
+  }
+  .nearby-activity-card-text-wrapper {
+    text-align: left;
+    .nearby-activity-card-heading {
+      font-size: 20px;
+      font-weight: 500;
+      margin-bottom: 5px;
+    }
+    .nearby-activity-card-desc {
+      font-size: 16px;
+      font-weight: 400;
+      margin-bottom: 5px;
+    }
+    .nearby-activity-card-readmore {
+      font-size: 16px;
+      font-weight: 600;
+      color: #fc6b43;
+      text-transform: uppercase;
+      margin-bottom: 40px;
+      cursor: pointer;
+    }
+  }
+}

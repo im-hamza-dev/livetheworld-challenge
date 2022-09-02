@@ -1,0 +1,50 @@
+.activity-page-wrapper {
+  overflow-x: hidden;
+}
+.activity-content-wrapper {
+  padding: 50px 100px;
+  .activity-content-heading {
+    font-weight: 800;
+    font-size: 24px;
+    text-transform: uppercase;
+    color: rgb(102, 159, 178);
+    line-height: 0.9;
+    text-align: left;
+  }
+  .activity-content-labels-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    overflow-x: auto;
+    div {
+      background: rgb(255, 255, 255);
+      border: 1px solid rgb(194, 217, 224);
+      border-radius: 34px;
+      font-weight: normal;
+      font-size: 12px;
+      line-height: 16px;
+      text-align: center;
+      color: rgb(25, 47, 84);
+      padding: 5px 10px;
+      margin: 0px 5px 5px 0px;
+    }
+  }
+  .activity-content-shortdesc {
+    color: #192f54;
+    font-size: 14px;
+    line-height: 24px;
+    color: rgb(25, 47, 84);
+  }
+  .activity-content-longdesc {
+    font-size: 14px;
+    line-height: 24px;
+    color: rgb(25, 47, 84);
+    margin-bottom: 30px;
+  }
+  .activity-nearby-wrapper {
+    h2 {
+      color: rgb(102, 159, 178);
+    }
+  }
+}
