@@ -1,0 +1,216 @@
+//modal
+.width_constraint_user {
+  width: 178px;
+}
+.modal_del_user {
+  margin-top: 200px;
+  width: 436px;
+  > div {
+    border-radius: 20px;
+  }
+}
+.modal_user {
+  margin-top: 100px;
+  width: 436px;
+  > div {
+    border-radius: 20px;
+  }
+}
+.modalBody_user {
+  width: 100%;
+  padding: 16px;
+  .flexbox_modal_user {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+  .flexbox_modal_user_num {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  .delHeading_user {
+    font-size: 16px;
+    line-height: 24px;
+  }
+  .flexbox_button_user {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+    .width_constraint_del {
+      min-width: 109px;
+    }
+    .width_constraint_edit {
+      min-width: 119px;
+    }
+    .confirmBtn {
+      border-radius: 20px;
+      padding: 10px 30px;
+      color: #ffffff;
+      outline: none !important;
+      background-color: rgb(252, 107, 67);
+      border: 1px solid #54a2a6;
+      box-sizing: border-box;
+      border-radius: 20px;
+      font-weight: 600;
+      font-size: 15px;
+      transition: 0.3s;
+      border: none;
+      outline: none;
+      &:hover {
+        background-color: rgb(193, 69, 35);
+
+        border-radius: 20px;
+      }
+      .spinnerLoader {
+        animation: rotate 2s linear infinite;
+        z-index: 2;
+        width: 30px;
+        height: 17px;
+        align-self: center;
+
+        & circle {
+          stroke: #ffffff;
+          stroke-linecap: round;
+          animation: dash 1.5s ease-in-out infinite;
+        }
+      }
+
+      @keyframes rotate {
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      @keyframes dash {
+        0% {
+          stroke-dasharray: 1, 150;
+          stroke-dashoffset: 0;
+        }
+        50% {
+          stroke-dasharray: 90, 150;
+          stroke-dashoffset: -35;
+        }
+        100% {
+          stroke-dasharray: 90, 150;
+          stroke-dashoffset: -124;
+        }
+      }
+    }
+  }
+  .heading_modal_user {
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 600;
+    margin-bottom: 15px;
+  }
+  .span_user {
+    width: 115px;
+    height: 15px;
+    font-weight: 600;
+    font-size: 12px;
+    color: #808080;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    &:first-of-type {
+      margin-top: 15px;
+    }
+  }
+  .input_user {
+    align-self: stretch;
+    width: 100%;
+    height: 40px;
+    background: #f1e9e9;
+    border: 0;
+    min-width: 178px;
+    box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.05);
+    border-radius: 10px;
+    padding: 5px 20px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    font-size: 15px;
+    line-height: 20px;
+    color: #6e6e6e;
+    outline: none;
+    clear: both;
+
+    &:focus ~ .messageCont {
+      height: 105px;
+    }
+  }
+
+  .errorCont {
+    display: none;
+  }
+
+  .messageCont {
+    transition: height 0.2s;
+    height: 0;
+    overflow: hidden;
+    .rowFlex {
+      display: flex;
+      flex-direction: row;
+    }
+  }
+
+  .messageCont,
+  .errorCont {
+    padding-left: 20px;
+    padding-right: 20px;
+
+    span {
+      font-size: 12px;
+      line-height: 10px;
+    }
+
+    .error {
+      color: #eb5757;
+    }
+  }
+
+  .showError {
+    input {
+      border: 1px solid #eb5757;
+      margin-bottom: 5px;
+    }
+
+    .errorCont {
+      display: block;
+    }
+
+    .messageCont {
+      height: 105px;
+      margin-bottom: 5px;
+    }
+  }
+  .messagecont {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-self: center;
+    margin-top: 15px;
+    span {
+      min-width: 205px;
+      height: 18px;
+      font-weight: normal;
+      font-size: 14px !important;
+      align-items: center;
+      color: #27ae60;
+      margin: 0px;
+    }
+    svg {
+      align-self: center;
+      margin-right: 9px;
+    }
+    .errormessage {
+      height: 18px;
+      font-weight: normal;
+      font-size: 14px !important;
+      align-items: center;
+      color: red;
+      margin: 0px;
+      text-align: center;
+    }
+  }
+}
