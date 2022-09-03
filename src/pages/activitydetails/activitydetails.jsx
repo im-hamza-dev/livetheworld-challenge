@@ -47,13 +47,12 @@ const ActivityDetails = () => {
 
   useEffect(() => {
     let token = localStorage.getItem("JWT");
-    console.log(token);
     if (!token || token === "undefined") {
-      console.log(token);
       setAuthenticated(false);
     } else {
       fetchActivity();
     }
+    // eslint-disable-next-line
   }, [authenticated, activity_slug]);
 
   const fetchActivity = () => {
@@ -65,7 +64,6 @@ const ActivityDetails = () => {
     setNearbyActivities(null);
     AppServices.getActivityDetail(query)
       .then((res) => {
-        console.log("Detail: ", res);
         setActivityDetail(res.data);
         activityIdTemp = res?.data?.id;
         let query = {
@@ -73,7 +71,6 @@ const ActivityDetails = () => {
         };
         AppServices.getNearbyActivities(query)
           .then((nearbyResp) => {
-            console.log("Nearby: ", nearbyResp);
             setNearbyActivities(nearbyResp?.data);
           })
           .catch((err) => {
@@ -85,7 +82,6 @@ const ActivityDetails = () => {
               (trip) => trip.type === "favorite"
             )?.activities;
             setFavoriteList(favoriteActivities);
-            console.log("Favorite Trips: ", favoriteActivities);
             let favoriteExist = favoriteActivities?.findIndex(
               (favorite) => favorite.id === activityIdTemp
             );

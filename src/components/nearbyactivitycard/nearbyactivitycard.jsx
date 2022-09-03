@@ -20,18 +20,15 @@ const NearbyActivityCard = ({
   };
 
   useEffect(() => {
-    console.log("calling useEffect", nearbyActivity?.id);
     if (nearbyActivity?.id) {
-      console.log("calling useEffect inside", nearbyActivity?.id);
-
       let favoriteExist = favoriteList?.findIndex(
         (favorite) => favorite.id === nearbyActivity?.id
       );
       if (favoriteExist >= 0) {
-        console.log("Nearby Items: ", nearbyActivity?.id);
         setFavorite(true);
       }
     }
+    // eslint-disable-next-line
   }, []);
 
   const toggleFavorite = () => {
@@ -45,7 +42,6 @@ const NearbyActivityCard = ({
       //remove from favorite
       AppServices.removeFrontendTripsFavorites(query)
         .then((res) => {
-          console.log("Remove Favorite: ", res);
           setIsLoading(false);
           if (res.status === 200) {
             setFavoriteList(res?.data[0]?.activities);
@@ -57,7 +53,6 @@ const NearbyActivityCard = ({
       //add to favorite
       AppServices.addFrontendTripsFavorites(query)
         .then((res) => {
-          console.log("Add Favorite: ", res);
           setIsLoading(false);
           if (res.status === 200) {
             setFavoriteList(res?.data[0]?.activities);

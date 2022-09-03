@@ -1,5 +1,4 @@
 import React from "react";
-import { useEffect } from "react";
 import "./activityimages.scss";
 import Slider from "react-slick";
 import AppServices from "../../service/appservice";
@@ -29,7 +28,6 @@ const ActivityImages = ({ imagesData, favorite, activityId, setFavorite }) => {
       //remove from favorite
       AppServices.removeFrontendTripsFavorites(query)
         .then((res) => {
-          console.log("Remove Favorite: ", res);
           setIsLoading(false);
           if (res.status === 200) {
             setFavorite(false);
@@ -40,7 +38,6 @@ const ActivityImages = ({ imagesData, favorite, activityId, setFavorite }) => {
       //add to favorite
       AppServices.addFrontendTripsFavorites(query)
         .then((res) => {
-          console.log("Add Favorite: ", res);
           setIsLoading(false);
           if (res.status === 200) {
             setFavorite(true);

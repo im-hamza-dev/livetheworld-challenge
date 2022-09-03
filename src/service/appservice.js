@@ -1,5 +1,4 @@
 import axiosInstance from "./baseService";
-import axios from "axios";
 
 export default class AppServices {
   static login = (query) => {

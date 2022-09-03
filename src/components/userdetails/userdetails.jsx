@@ -5,7 +5,6 @@ import AppContext from "../../context/context";
 
 const UserDetails = () => {
   const { userData } = useContext(AppContext);
-  console.log(userData);
 
   return (
     <div className="user-wrapper">

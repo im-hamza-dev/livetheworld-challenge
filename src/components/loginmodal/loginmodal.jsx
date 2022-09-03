@@ -18,23 +18,23 @@ const LoginModal = ({ showLogin, setAuthenticated }) => {
 
   const loginUser = (e) => {
     e.preventDefault();
-    console.log("Credentials: ", email, password);
     if (validateEmail()) {
-      console.log("Login");
       let query = {
         identifier: email,
         password,
       };
+      setLoading(true);
       AppServices.login(query)
         .then((res) => {
-          console.log("Login", res);
           localStorage.setItem("JWT", res.data.jwt);
           updateUserData(res.data.user);
           setAuthenticated(true);
+          setLoading(false);
         })
         .catch((err) => {
           console.log(err);
           setMessage(true);
+          setLoading(false);
           setSucceeded(false);
           setErrorMessage(err.message);
         });
@@ -107,7 +107,7 @@ const LoginModal = ({ showLogin, setAuthenticated }) => {
                 className={`${"confirmBtn"} ${"width_constraint_edit"}`}
                 onClick={(e) => loginUser(e)}
               >
-                {isLoading ? "Submitting" : <div>Login</div>}
+                {isLoading ? "..." : <div>Login</div>}
               </button>
             </div>
           </form>
