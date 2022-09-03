@@ -1,7 +1,8 @@
 import axiosInstance from "./baseService";
+import axios from "axios";
 
 export default class AppServices {
-  login = (query) => {
+  static login = (query) => {
     const targetUrl = `/auth/local/`;
     return new Promise((resolve, reject) => {
       axiosInstance["post"](targetUrl, query)
@@ -14,8 +15,8 @@ export default class AppServices {
     });
   };
 
-  getActivityDetail = (query) => {
-    const targetUrl = ` /frontend/activities/slug/${query.activitySlug}`;
+  static getActivityDetail = (query) => {
+    const targetUrl = `/frontend/activities/slug/${query.activitySlug}`;
     return new Promise((resolve, reject) => {
       axiosInstance["get"](targetUrl)
         .then((response) => {
@@ -27,8 +28,8 @@ export default class AppServices {
     });
   };
 
-  getFrontendTrips = (query) => {
-    const targetUrl = ` /frontend/trips/${query.activitySlug}`;
+  static getFrontendTrips = () => {
+    const targetUrl = `/frontend/trips`;
     return new Promise((resolve, reject) => {
       axiosInstance["get"](targetUrl)
         .then((response) => {
@@ -40,8 +41,8 @@ export default class AppServices {
     });
   };
 
-  getNearbyActivities = (query) => {
-    const targetUrl = ` /frontend/activities/nearby/${query.activitySlug}`;
+  static getNearbyActivities = (query) => {
+    const targetUrl = `/frontend/activities/nearby/${query.activityId}`;
     return new Promise((resolve, reject) => {
       axiosInstance["get"](targetUrl)
         .then((response) => {
@@ -53,8 +54,8 @@ export default class AppServices {
     });
   };
 
-  addFrontendTripsFavorites = (query) => {
-    const targetUrl = ` /frontend/trips/add_activity`;
+  static addFrontendTripsFavorites = (query) => {
+    const targetUrl = `/frontend/trips/add_activity`;
     return new Promise((resolve, reject) => {
       axiosInstance["put"](targetUrl, query)
         .then((response) => {
@@ -66,8 +67,8 @@ export default class AppServices {
     });
   };
 
-  removeFrontendTripsFavorites = (query) => {
-    const targetUrl = ` /frontend/trips/remove_activity`;
+  static removeFrontendTripsFavorites = (query) => {
+    const targetUrl = `/frontend/trips/remove_activity`;
     return new Promise((resolve, reject) => {
       axiosInstance["put"](targetUrl, query)
         .then((response) => {
