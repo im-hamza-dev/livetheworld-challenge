@@ -1,29 +1,95 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./nearbyactivitycard.scss";
-import Sample1 from "../../assets/images/1.jpg";
 import { useHistory } from "react-router-dom";
+import AppServices from "../../service/appservice";
 
-const NearbyActivityCard = () => {
+const NearbyActivityCard = ({
+  nearbyActivity,
+  favoriteList,
+  setFavoriteList,
+}) => {
   let history = useHistory();
+  let [isLoading, setIsLoading] = useState(false);
+  let [favorite, setFavorite] = useState(false);
+
   const gotoNearbyActivity = () => {
-    history.push("/belfry-of-ghent");
+    document
+      .getElementById("activity-page")
+      .scrollIntoView({ behavior: "smooth" });
+    history.push(`/${nearbyActivity?.slug}`);
+  };
+
+  useEffect(() => {
+    if (nearbyActivity?.id) {
+      let favoriteExist = favoriteList?.findIndex(
+        (favorite) => favorite.id === nearbyActivity?.id
+      );
+      if (favoriteExist >= 0) {
+        setFavorite(true);
+      }
+    }
+    // eslint-disable-next-line
+  }, []);
+
+  const toggleFavorite = () => {
+    setIsLoading(true);
+    let query = {
+      activityId: nearbyActivity?.id, // ID OF ACTIVITY TO ADD
+      tripId: 0, // ID OF YOUR FAVORITE TRIP WHICH YOU RECEIVED IN TRIPS API
+      tripType: "favorite",
+    };
+    if (favorite) {
+      //remove from favorite
+      AppServices.removeFrontendTripsFavorites(query)
+        .then((res) => {
+          setIsLoading(false);
+          if (res.status === 200) {
+            setFavoriteList(res?.data[0]?.activities);
+            setFavorite(false);
+          }
+        })
+        .catch((err) => console.log(err));
+    } else {
+      //add to favorite
+      AppServices.addFrontendTripsFavorites(query)
+        .then((res) => {
+          setIsLoading(false);
+          if (res.status === 200) {
+            setFavoriteList(res?.data[0]?.activities);
+            setFavorite(true);
+          }
+        })
+        .catch((err) => console.log(err));
+    }
   };
 
   return (
-    <div className="nearby-activity-card">
+    <div
+      className="nearby-activity-card"
+      id={`nearby-activity-${nearbyActivity?.id}`}
+    >
       <div className="nearby-activity-card-cover">
         <div className="nearby-activity-card-btn-wrapper">
-          <button>Save</button>
+          <button onClick={() => toggleFavorite()}>
+            {isLoading ? "..." : favorite ? "Saved" : "Save"}
+          </button>
         </div>
-        <img src={Sample1} alt="nearby-activity-cover" />
+        <img
+          src={nearbyActivity?.images[0].small}
+          alt={nearbyActivity?.images[0].name}
+          loading=" lazy"
+        />
       </div>
       <div className="nearby-activity-card-text-wrapper">
-        <div className="nearby-activity-card-heading">Patershol</div>
-        <p className="nearby-activity-card-desc">
-          A small but cute neighbourhood with cobblestone streets and
-          independent shops. Close to Gravensteen (Castle of the Counts) that
-          makes a historic atmosphere ...
-        </p>
+        <div className="nearby-activity-card-heading">
+          {nearbyActivity?.name}
+        </div>
+        <p
+          className="nearby-activity-card-desc"
+          dangerouslySetInnerHTML={{
+            __html: nearbyActivity?.description_short,
+          }}
+        />
         <div
           className="nearby-activity-card-readmore"
           onClick={() => gotoNearbyActivity()}

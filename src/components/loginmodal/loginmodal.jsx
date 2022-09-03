@@ -1,25 +1,43 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import "./loginmodal.scss";
 import { Modal } from "react-bootstrap";
-import axiosInstance from "../../service/baseService";
 import AppServices from "../../service/appservice";
+import AppContext from "../../context/context";
 
-const LoginModal = ({ showLogin, handleLogin }) => {
+const LoginModal = ({ showLogin, setAuthenticated }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const [isLoading, setLoading] = useState(false);
   const [showMessage, setMessage] = useState(false);
   const [succeeded, setSucceeded] = useState(false);
-
+  const [errorMessage, setErrorMessage] = useState("Invalid Credentials");
   const [emailError, setEmailError] = useState(false);
+
+  const { updateUserData } = useContext(AppContext);
 
   const loginUser = (e) => {
     e.preventDefault();
-    console.log("Credentials: ", email, password);
-
     if (validateEmail()) {
-      console.log("Login");
+      let query = {
+        identifier: email,
+        password,
+      };
+      setLoading(true);
+      AppServices.login(query)
+        .then((res) => {
+          localStorage.setItem("JWT", res.data.jwt);
+          updateUserData(res.data.user);
+          setAuthenticated(true);
+          setLoading(false);
+        })
+        .catch((err) => {
+          console.log(err);
+          setMessage(true);
+          setLoading(false);
+          setSucceeded(false);
+          setErrorMessage(err.message);
+        });
     }
   };
 
@@ -36,13 +54,13 @@ const LoginModal = ({ showLogin, handleLogin }) => {
   return (
     <Modal
       show={showLogin}
-      onHide={handleLogin}
+      onHide={setAuthenticated}
       dialogClassName={"modal_user"}
       backdrop="static"
       keyboard={false}
     >
       <Modal.Body>
-        <div className={"modalBody_user"}>
+        <div className={"modalBody_user fadein"}>
           <div className={"heading_modal_user"}>Login</div>
           <form>
             <span className={"span_user"}>Email</span>
@@ -79,7 +97,7 @@ const LoginModal = ({ showLogin, handleLogin }) => {
                 </div>
               ) : (
                 <div className={"messagecont"}>
-                  <span className={"errormessage"}>Invalid Credentials</span>
+                  <span className={"errormessage"}>{errorMessage}</span>
                 </div>
               )
             ) : null}
@@ -89,7 +107,7 @@ const LoginModal = ({ showLogin, handleLogin }) => {
                 className={`${"confirmBtn"} ${"width_constraint_edit"}`}
                 onClick={(e) => loginUser(e)}
               >
-                {isLoading ? "Submitting" : <div>Login</div>}
+                {isLoading ? "..." : <div>Login</div>}
               </button>
             </div>
           </form>

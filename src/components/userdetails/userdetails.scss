@@ -1,0 +1,18 @@
+.user-wrapper {
+  width: 100%;
+  background: #f27941;
+  background: -webkit-linear-gradient(top left, #f27941, #b24f1a);
+  background: -moz-linear-gradient(top left, #f27941, #b24f1a);
+  background: linear-gradient(to bottom right, #f27941, #b24f1a);
+  padding: 10px;
+  margin-bottom: 10px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  img {
+    width: 30px;
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+}

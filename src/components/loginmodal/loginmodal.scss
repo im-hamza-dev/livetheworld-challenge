@@ -1,3 +1,4 @@
+$mobile: 590px;
 //modal
 .width_constraint_user {
   width: 178px;
@@ -212,5 +213,33 @@
       margin: 0px;
       text-align: center;
     }
+  }
+}
+.fadein {
+  animation-name: fadeIn;
+  animation-duration: 0.5s;
+  transition: all 0.5s ease-in-out;
+  animation-fill-mode: both;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@media (max-width: $mobile) {
+  .modal_del_user {
+    margin-top: 100px;
+    width: 336px;
+  }
+  .modal_user {
+    width: 336px;
+    margin: 100px auto 0px;
+  }
+  .modalBody_user {
+    margin: 0px auto;
   }
 }
